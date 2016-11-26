@@ -1,0 +1,103 @@
+
+<!-- Table 'scheduler_tasks' edit -->
+<form action="?" method="post" enctype="multipart/form-data" name="frmEdit" class="form-horizontal">
+[#if OK#]
+<div class="alert alert-success"><#LANG_DATA_SAVED#></div>
+[#endif OK#]
+[#if ERR#]
+<div class="alert alert-error"><#LANG_FILLOUT_REQURED#></div>
+[#endif ERR#]
+<fieldset>
+[#if ID=""#]
+<legend><#LANG_NEW_RECORD#></legend>
+[#endif ID#]
+<!-- TITLE (varchar) -->
+<div class="form-group">
+ <label class="col-lg-3 control-label"[#if ERR_TITLE#] style="color:red;font-weight:bold"[#endif#]>
+ <#LANG_TITLE#>:
+ (*)
+  <#LANG_HCB#>title<#LANG_HCE#>
+ </label>
+ <div class="col-lg-4"><input type="text" class="form-control" name="title" value="[#TITLE#]" id="title"></div>
+</div>
+<!-- VALUE_TYPE (varchar) -->
+<div class="form-group">
+ <label class="col-lg-3 control-label"[#if ERR_VALUE_TYPE#] style="color:red;font-weight:bold"[#endif#]>
+ <#LANG_TYPE#>:
+  <#LANG_HCB#>scheduler_value_type<#LANG_HCE#>
+ </label>
+ <div class="col-lg-4">
+  <select name="value_type" class="form-control">
+   <option value="0"><#LANG_VALUE#></option>
+   <option value="1"[#if VALUE_TYPE="1"#] selected[#endif#]><#LANG_ON_OFF_SWITCH#></option>
+   <option value="2"[#if VALUE_TYPE="2"#] selected[#endif#]><#LANG_ACTION#></option>
+  </select>
+  </div>
+</div>
+<!-- VALUE_TITLE (varchar) -->
+<div class="form-group">
+ <label class="col-lg-3 control-label"[#if ERR_VALUE_TITLE#] style="color:red;font-weight:bold"[#endif#]>
+ <#LANG_VALUE#> (<#LANG_TITLE#>):
+  <#LANG_HCB#>scheduler_value_title<#LANG_HCE#>
+ </label>
+ <div class="col-lg-4"><input type="text" class="form-control" name="value_title" value="[#VALUE_TITLE#]" id="value_title"></div>
+</div>
+<!-- LINKED_OBJECT (varchar) -->
+<div class="form-group">
+ <label class="col-lg-3 control-label"[#if ERR_LINKED_OBJECT#] style="color:red;font-weight:bold"[#endif#]>
+ <#LANG_LINKED_OBJECT#>:
+  <#LANG_HCB#>linked_object<#LANG_HCE#>
+ </label>
+ <div class="col-lg-4"><input type="text" class="form-control" name="linked_object" value="[#LINKED_OBJECT#]" id="linked_object"></div>
+</div>
+<!-- LINKED_PROPERTY (varchar) -->
+<div class="form-group">
+ <label class="col-lg-3 control-label"[#if ERR_LINKED_PROPERTY#] style="color:red;font-weight:bold"[#endif#]>
+ <#LANG_LINKED_PROPERTY#>:
+  <#LANG_HCB#>linked_property<#LANG_HCE#>
+ </label>
+ <div class="col-lg-4"><input type="text" class="form-control" name="linked_property" value="[#LINKED_PROPERTY#]" id="linked_property"></div>
+</div>
+<!-- LINKED_METHOD (varchar) -->
+<div class="form-group">
+ <label class="col-lg-3 control-label"[#if ERR_LINKED_METHOD#] style="color:red;font-weight:bold"[#endif#]>
+ <#LANG_METHOD#>:
+  <#LANG_HCB#>linked_method<#LANG_HCE#>
+ </label>
+ <div class="col-lg-4"><input type="text" class="form-control" name="linked_method" value="[#LINKED_METHOD#]" id="linked_method"></div>
+</div>
+[#module name="linkedobject" object_field="linked_object" property_field="linked_property" method_field="linked_method"#]
+
+ <!-- CODE (varchar) -->
+ <div class="form-group">
+  <label class="col-lg-3 control-label"[#if ERR_CODE#] style="color:red;font-weight:bold"[#endif#]>
+   <#LANG_CODE#>:
+    <#LANG_HCB#>scheduler_code<#LANG_HCE#>
+  </label>
+  <div class="col-lg-4">
+   [#module name="blockly_code" system_name="scheduler_task<#ID#>" code_field="code" action=""#]
+    <div id="code_area">
+     <textarea class="form-control" name="code" id="code" rows="5">[#CODE#]</textarea>
+     </div>
+  </div>
+
+ </div>
+
+<div class="form-group">
+        <div class="col-lg-offset-3 col-lg-4">
+ [#if ID!=""#]
+ <button type="submit" name="subm" value="Submit" class="btn btn-primary"><#LANG_SUBMIT#></button>
+ [#else ID#]
+ <button type="submit" name="subm" value="Add" class="btn btn-primary"><#LANG_ADD#></button>
+ [#endif ID#]
+ <a href="?data_source=<#DATA_SOURCE#>" class="btn btn-default "><#LANG_CANCEL#></a>
+<input type="hidden" name="id" value="<#ID#>">
+<input type="hidden" name="view_mode" value="<#VIEW_MODE#>">
+<input type="hidden" name="edit_mode" value="<#EDIT_MODE#>">
+<input type="hidden" name="mode" value="update">
+<input type="hidden" name="data_source" value="<#DATA_SOURCE#>">
+<input type="hidden" name="tab" value="<#TAB#>">
+        </div>
+</div>
+</fieldset>
+</form>

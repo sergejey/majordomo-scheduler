@@ -1,0 +1,128 @@
+
+<!-- Table 'scheduler_tasks' edit -->
+<form action="?" method="post" enctype="multipart/form-data" name="frmEdit" class="form-horizontal">
+[#if OK#]
+<div class="alert alert-success"><#LANG_DATA_SAVED#></div>
+[#endif OK#]
+[#if ERR#]
+<div class="alert alert-error"><#LANG_FILLOUT_REQURED#></div>
+[#endif ERR#]
+<fieldset>
+[#if ID=""#]
+<legend><#LANG_NEW_RECORD#></legend>
+[#endif ID#]
+<div class="form-group">
+<div>
+<table class="table table-stripped">
+ <tr>
+  <th>&nbsp;</th>
+  <th>[#VALUE_TITLE#]</th>
+  <th><#LANG_TIME#></th>
+  <th><#LANG_RUN_WEEKDAYS#></th>
+  <th>&nbsp;</th>
+ </tr>
+ [#begin PROPERTIES#]
+ <tr>
+  <td>
+   <label><input type="checkbox" value="1" name="enabled[#ID#]"[#if ENABLED="1"#] checked[#endif#]> <#LANG_ON#></label>
+  </td>
+  <td>
+   [#if "<#VALUE_TYPE#>"=="0"#]
+   <input type="text" name="value[#ID#]" id="value[#ID#]" value="[#VALUE#]" class="form-control">
+   [#endif#]
+   [#if "<#VALUE_TYPE#>"=="1"#]
+    <input type="radio" name="value[#ID#]" id="value[#ID#]" value="1"[#if VALUE="1"#] checked[#endif#]> <#LANG_ON#>
+    <input type="radio" name="value[#ID#]" id="value[#ID#]" value="0"[#if VALUE!="1"#] checked[#endif#]> <#LANG_OFF#>
+   [#endif#]
+    [#if "<#VALUE_TYPE#>"=="2"#]
+     n/a
+     <input type="hidden" name="value[#ID#]" value="[#VALUE#]">
+    [#endif#]
+  </td>
+  <td>
+   <select name="hour[#ID#]">
+    [#begin HOURS#]
+    <option[#if VALUE="<#PROPERTIES.SET_HOUR#>"#] selected[#endif#]>[#VALUE#]</option>
+    [#end HOURS#]
+   </select>
+   :
+   <select name="minute[#ID#]">
+    [#begin MINUTES#]
+    <option[#if VALUE="<#PROPERTIES.SET_MINUTE#>"#] selected[#endif#]>[#VALUE#]</option>
+    [#end MINUTES#]
+   </select>
+   </td>
+  <td>
+   [#begin DAYS#]
+   <label><input type="checkbox" name="days<#PROPERTIES.ID#>[]" value="[#VALUE#]"[#if SELECTED#] checked[#endif#]>[#TITLE#]</label><br/>
+   [#end DAYS#]
+  </td>
+  <td><a href="?id=<#ID#>&tab=<#TAB#>&view_mode=<#VIEW_MODE#>&delete_id=[#ID#]" onClick="return confirm('<#LANG_ARE_YOU_SURE#>');" class="btn btn-default"><i class="glyphicon glyphicon-remove"></i></td>
+ </tr>
+ [#end PROPERTIES#]
+ <tr>
+  <td colspan="20">
+   <div id="add_btn">
+   <a href="#" class="btn btn-default" onClick="$('#add_div').show();$('#add_btn').hide();"><i class="glyphicon glyphicon-plus"></i> <#LANG_ADD#></a>
+   </div>
+   <div id="add_div" style="display:none">
+    [#if VALUE_TYPE!="2"#]
+    [#VALUE_TITLE#]:
+      [#if VALUE_TYPE="0"#]
+      <input type="text" name="new_value" value="">
+      [#endif#]
+      [#if VALUE_TYPE="1"#]
+      <input type="radio" name="new_value" value="1" checked> <#LANG_ON#>
+      <input type="radio" name="new_value" value="0"> <#LANG_OFF#>
+      [#endif#]
+     <br/>
+     [#endif VALUE_TYPE#]
+    <#LANG_TIME#>:
+     <select name="new_hour">
+      [#begin HOURS#]
+      <option>[#VALUE#]</option>
+      [#end HOURS#]
+     </select>
+     :
+     <select name="new_minute">
+      [#begin MINUTES#]
+      <option>[#VALUE#]</option>
+      [#end MINUTES#]
+     </select>
+     <br/>
+     <#LANG_RUN_WEEKDAYS#>:<br/>
+      <label><input type="checkbox" name="new_days[]" value="0"> <#LANG_WEEK_SUN#></label><br/>
+      <label><input type="checkbox" name="new_days[]" value="1"> <#LANG_WEEK_MON#></label><br/>
+      <label><input type="checkbox" name="new_days[]" value="2"> <#LANG_WEEK_TUE#></label><br/>
+      <label><input type="checkbox" name="new_days[]" value="3"> <#LANG_WEEK_WED#></label><br/>
+      <label><input type="checkbox" name="new_days[]" value="4"> <#LANG_WEEK_THU#></label><br/>
+      <label><input type="checkbox" name="new_days[]" value="5"> <#LANG_WEEK_FRI#></label><br/>
+      <label><input type="checkbox" name="new_days[]" value="6"> <#LANG_WEEK_SAT#></label>
+   </div>
+  </td>
+ </tr>
+</table> 
+</div>
+</div>
+[#module name="linkedobject" object_field="linked_object" property_field="linked_property" method_field="linked_method"#]
+<div class="form-group">
+        <div class="col-lg-offset-3 col-lg-4">
+ [#if ID!=""#]
+ <button type="submit" name="subm" value="Submit" class="btn btn-primary"><#LANG_SUBMIT#></button>
+ [#else ID#]
+ <button type="submit" name="subm" value="Add" class="btn btn-primary"><#LANG_ADD#></button>
+ [#endif ID#]
+ <a href="?data_source=<#DATA_SOURCE#>" class="btn btn-default "><#LANG_CANCEL#></a>
+<input type="hidden" name="id" value="<#ID#>">
+<input type="hidden" name="view_mode" value="<#VIEW_MODE#>">
+<input type="hidden" name="edit_mode" value="<#EDIT_MODE#>">
+<input type="hidden" name="mode" value="update">
+<input type="hidden" name="data_source" value="<#DATA_SOURCE#>">
+<input type="hidden" name="tab" value="<#TAB#>">
+        </div>
+</div>
+</fieldset>
+</form>
+<!-- dataset2 (module) -->
+<div class="form-group">
+</div>
