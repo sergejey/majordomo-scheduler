@@ -289,6 +289,10 @@ function runSchedulerPoint($id) {
   setGlobal('cycle_schedulerappControl', 'restart');
   setGlobal('cycle_schedulerappAutoRestart', '1');
   parent::install();
+
+  @include_once(ROOT.'languages/'.$this->name.'_'.LANG.'.php');
+  @include_once(ROOT.'languages/'.$this->name.'_default'.'.php');
+
   SQLExec("UPDATE project_modules SET TITLE='".LANG_SCHEDULER_MODULE_TITLE."' WHERE NAME='".$this->name."'");
  }
 /**
