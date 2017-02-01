@@ -286,6 +286,9 @@ function runSchedulerPoint($id) {
 * @access private
 */
  function install($data='') {
+  if (file_exists(ROOT.'scripts/cycle_schedulerapp.php')) {
+   unlink(ROOT.'scripts/cycle_schedulerapp.php');
+  }
   setGlobal('cycle_schedappControl', 'restart');
   setGlobal('cycle_schedappAutoRestart', '1');
   parent::install();
