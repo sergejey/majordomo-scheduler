@@ -286,8 +286,8 @@ function runSchedulerPoint($id) {
 * @access private
 */
  function install($data='') {
-  setGlobal('cycle_schedulerappControl', 'restart');
-  setGlobal('cycle_schedulerappAutoRestart', '1');
+  setGlobal('cycle_schedappControl', 'restart');
+  setGlobal('cycle_schedappAutoRestart', '1');
   parent::install();
 
   @include_once(ROOT.'languages/'.$this->name.'_'.SETTINGS_SITE_LANGUAGE.'.php');
