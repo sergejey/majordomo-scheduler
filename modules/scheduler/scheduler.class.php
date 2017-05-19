@@ -290,7 +290,7 @@ function runSchedulerPoint($id) {
    unlink(ROOT.'scripts/cycle_schedulerapp.php');
   }
   setGlobal('cycle_schedappControl', 'restart');
-  setGlobal('cycle_schedappAutoRestart', '1');
+  //setGlobal('cycle_schedappAutoRestart', '1');
   parent::install();
 
   @include_once(ROOT.'languages/'.$this->name.'_'.SETTINGS_SITE_LANGUAGE.'.php');
