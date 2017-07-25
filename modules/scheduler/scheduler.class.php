@@ -317,7 +317,7 @@ function runSchedulerPoint($id) {
 *
 * @access private
 */
- function dbInstall() {
+ function dbInstall($data = '') {
 /*
 scheduler_tasks - 
 scheduler_points - 
