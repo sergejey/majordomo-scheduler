@@ -120,7 +120,7 @@ function run() {
 * @access public
 */
 function admin(&$out) {
- if (isset($this->data_source) && !$_GET['data_source'] && !$_POST['data_source']) {
+ if (isset($this->data_source) && !gr('data_source')) {
   $out['SET_DATASOURCE']=1;
  }
  if ($this->data_source=='scheduler_tasks' || $this->data_source=='') {
@@ -128,14 +128,14 @@ function admin(&$out) {
    $this->search_scheduler_tasks($out);
   }
   if ($this->view_mode=='edit_scheduler_tasks') {
-   $this->edit_scheduler_tasks($out, $this->id);
+   $this->edit_scheduler_tasks($out, isset($this->id)?$this->id:0);
   }
   if ($this->view_mode=='delete_scheduler_tasks') {
    $this->delete_scheduler_tasks($this->id);
    $this->redirect("?data_source=scheduler_tasks");
   }
  }
- if (isset($this->data_source) && !$_GET['data_source'] && !$_POST['data_source']) {
+ if (isset($this->data_source) && !gr('data_source')) {
   $out['SET_DATASOURCE']=1;
  }
  if ($this->data_source=='scheduler_points') {

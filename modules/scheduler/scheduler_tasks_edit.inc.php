@@ -34,7 +34,7 @@ if ($this->mode == 'update') {
         global $linked_property;
         $rec['LINKED_PROPERTY'] = $linked_property;
         //updating '<%LANG_METHOD%>' (varchar)
-        global $linked_method;
+        $linked_method = gr('linked_method');
         $rec['LINKED_METHOD'] = $linked_method;
     }
     // step: data
@@ -42,7 +42,7 @@ if ($this->mode == 'update') {
     }
     //UPDATING RECORD
     if ($ok) {
-        if ($rec['ID']) {
+        if (isset($rec['ID'])) {
             SQLUpdate($table_name, $rec); // update
         } else {
             $new_rec = 1;
@@ -134,7 +134,7 @@ if ($this->tab == 'data') {
 }
 if (is_array($rec)) {
     foreach ($rec as $k => $v) {
-        if (!is_array($v)) {
+        if ($v && !is_array($v)) {
             $rec[$k] = htmlspecialchars($v);
         }
     }
